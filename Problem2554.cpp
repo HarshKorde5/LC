@@ -13,10 +13,30 @@ Return the maximum number of integers you can choose following the mentioned rul
 #include<bits/stdc++.h>
 
 using namespace std;
-
 class Solution {
 public:
+    int maxCount(vector<int>& banned, int n, int maxSum) 
+    {
+        unordered_set<int> bannedSet(banned.begin(),banned.end());
 
+        int count = 0;
+
+
+        for(int i = 1;i <= n;i++)
+        {
+            if(bannedSet.count(i))  continue;
+
+
+            if(maxSum - i < 0)  return count;
+
+
+            maxSum -= i;
+
+            count++;
+        }
+
+        return count;
+    }
 
     int maxCount1(vector<int>& banned, int n, int maxSum) 
     {
@@ -49,7 +69,7 @@ int main()
 
     vector<int> banned = {1,6,5};
 
-    cout<<s.maxCount1(banned,5,6);
+    cout<<s.maxCount(banned,5,6);
 
     return 0;
 }
