@@ -17,7 +17,7 @@ Return an array of booleans answer such that answer[i] is true if nums[fromi..to
 
 #include<stdio.h>
 #include<stdlib.h>
-
+#include<stdbool.h>
 bool checkParity(int* nums,int start,int end)
 {
     
@@ -103,7 +103,7 @@ bool* isArraySpecial(int* nums, int numsSize, int** queries, int queriesSize, in
 
     for(int start = 0;start < numsSize;start++)
     {
-        end = fmax(start,end);
+        end = start > end ? start : end;
 
  
         while(end < numsSize - 1 && nums[end] % 2 != nums[end + 1] % 2)
@@ -128,19 +128,27 @@ bool* isArraySpecial(int* nums, int numsSize, int** queries, int queriesSize, in
 int main()
 {
     int nums[] = {4,3,1,6};
-    int queries[][] = {{0,2},{2,3}};
-
     int c = 0,rs = 0;
 
     int *col = &c;
     int *retSize = &rs;
 
+    int** queries = (int**)malloc(2 * sizeof(int*));
+    for (int i = 0; i < 2; i++) {
+        queries[i] = (int*)malloc(2 * sizeof(int));
+    }
 
-    bool *ret = isArraySpecial(nums,4,queries,2,col,returnSize);
+    queries[0][0] = 0;
+    queries[0][1] = 2;
+
+    queries[1][0] = 2;
+    queries[1][1] = 3;
+
+    bool *ret = isArraySpecial(nums,4,queries,2,col,retSize);
 
     for(int i = 0;i < 2;i++)
     {
-        printf("%s\t",ret[i]);
+        printf("%d\t",ret[i]);
 
     }
 
