@@ -1,89 +1,43 @@
 /*
-Given two strings s and goal, return true if and only if s can become goal after some number of shifts on s.
+You are given an integer array arr of length n that represents a permutation of the integers in the range [0, n - 1].
 
-A shift on s consists of moving the leftmost character of s to the rightmost position.
+We split arr into some number of chunks (i.e., partitions), and individually sort each chunk. After concatenating them, the result should equal the sorted array.
 
-For example, if s = "abcde", then it will be "bcdea" after one shift.
+Return the largest number of chunks we can make to sort the array.
 */
 
-
 #include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
-
 
 class Solution {
 public:
-    bool rotateString(string s, string goal) 
+    int maxChunksToSorted(vector<int>& arr) 
     {
-        if(s.length() != goal.length())    return false;
+        int n = arr.size();
+        int chunks = 0,prefixSum = 0,sortedPrefixSum = 0;
 
-        string concated = s+s;
-
-        int pos = concated.find(goal);
-
-        return pos == -1 ? false : true;
-    }
-
-    bool rotateString1(string s, string goal) 
-    {
-        if(s.length() != goal.length())    return false;
-
-        int i = 0;
-
-        while(s[i] != goal[0] && i < s.length())
+        for(int i = 0;i < n;i++)
         {
-            i++;
-        }
+            sortedPrefixSum += i;
+            prefixSum += arr[i];
 
-        int j = 0,k = i;
-
-        if(i >= s.length())
-        {
-            return false;
-        }
-        else
-        {
-
-            while(i < s.length() )
+            if(prefixSum == sortedPrefixSum)
             {
-                if(s[i] == goal[j])
-                {
-                    i++;
-                    j++;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            while(j < k)
-            {
-                if(s[j] == goal[i])
-                {
-                    j++;
-                    i++;
-                }
-                else
-                {
-                    return false;
-                }
+                chunks++;
             }
         }
 
-        return true;
+        return chunks;
     }
-
-
 };
-
 
 int main()
 {
     Solution s;
+    vector<int> nums = {1,0,2,3,4};
 
-    string s1("gcmbf");
-    string goal("fgcmb");
-    cout<<s.rotateString(s1,goal);
+    cout<<s.maxChunksToSorted(nums);
+
     return 0;
 }
