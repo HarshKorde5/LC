@@ -16,6 +16,8 @@ int climbStairs(int n)
     return nums[n % 2];
 }
 
+
+
 int main()
 {
     printf("%d\n",climbStairs(3));
