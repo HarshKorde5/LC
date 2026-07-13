@@ -66,7 +66,7 @@ public:
         }
         return -1;
     }
-    vector<int> targetIndices(vector<int>& nums, int target) {
+    vector<int> targetIndices_02(vector<int>& nums, int target) {
         sort(nums.begin(), nums.end());
         int index = bsearch(nums, target);
         vector<int> res;
@@ -91,6 +91,19 @@ public:
             i++;
         }
         sort(res.begin(), res.end());
+        return res;
+    }
+
+    vector<int> targetIndices(vector<int>& nums, int target) {
+        int cnt = 0, rank = 0;
+        for(auto e: nums){
+            cnt += e == target;
+            rank  += e < target;
+        }
+        vector<int> res;
+        while(cnt--){
+            res.push_back(rank++);
+        }
         return res;
     }
 };
