@@ -1,5 +1,5 @@
 class Solution {
-    public List<List<Integer>> subsets(int[] nums) {
+    public List<List<Integer>> subsets_iter(int[] nums) {
 
         List<List<Integer>> result = new ArrayList<>();
         result.add(new ArrayList<>());
@@ -17,7 +17,7 @@ class Solution {
         return result;
     }
 
-    public List<List<Integer>> subsets_rec(int[] nums) {
+    public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
 
         List<Integer> currsubset = new ArrayList<>();
