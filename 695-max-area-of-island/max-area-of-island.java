@@ -32,4 +32,30 @@ class Solution {
             dfs(i + dir[0], j + dir[1], grid);
         }
     }
+
+
+    private void bfs(int i, int j, int[][] grid){
+        Deque<int[]> q = new ArrayDeque<>();
+
+        q.offer(new int[]{i,j});
+        visited[i][j] = true;
+        area = 1;
+
+        while(!q.isEmpty()){
+            int[] curr = q.poll();
+
+            int r  = curr[0], c = curr[1];
+
+            for(int[] dir : directions){
+                int nr = r + dir[0], nc = c + dir[1];
+
+                if(nr < 0 || nc < 0 || nr >= m || nc >= n || grid[nr][nc] == 0 || visited[nr][nc])   continue;
+
+                area++;
+                visited[nr][nc] = true;
+                q.add(new int[]{nr,nc});
+            }
+            
+        }
+    }
 }
