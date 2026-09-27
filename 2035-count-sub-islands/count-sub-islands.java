@@ -10,10 +10,9 @@ class Solution {
 
         for(int i = 0; i < m; i++){
             for(int j = 0; j < n; j++){
-                if(grid2[i][j] == 1 && !visited[i][j]){
-                    if(bfs(i,j,grid1,grid2,visited)){
+                if(grid2[i][j] == 1 && !visited[i][j] && dfs(i,j,grid1,grid2,visited)){
                         res++;
-                    }
+                    
                 }
             }
         }
@@ -44,6 +43,20 @@ class Solution {
             }
         }
 
+        return res;
+    }
+
+    private boolean dfs(int r, int c, int[][] grid1, int[][] grid2, boolean[][] visited) {
+        if (r < 0 || c < 0 || r >= m || c >= n ||
+            grid2[r][c] == 0 || visited[r][c]) {
+            return true;
+        }
+        visited[r][c] = true;
+        boolean res = grid1[r][c] == 1;
+        res &= dfs(r - 1, c, grid1, grid2, visited);
+        res &= dfs(r + 1, c, grid1, grid2, visited);
+        res &= dfs(r, c - 1, grid1, grid2, visited);
+        res &= dfs(r, c + 1, grid1, grid2, visited);
         return res;
     }
 }
