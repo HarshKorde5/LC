@@ -15,7 +15,7 @@
  */
 
 public class Solution {
-    public boolean isSameTree(TreeNode p, TreeNode q) {
+    public boolean isSameTree_bfs(TreeNode p, TreeNode q) {
         Queue<TreeNode> q1 = new LinkedList<>();
         Queue<TreeNode> q2 = new LinkedList<>();
         q1.add(p);
@@ -26,7 +26,8 @@ public class Solution {
                 TreeNode nodeP = q1.poll();
                 TreeNode nodeQ = q2.poll();
 
-                if (nodeP == null && nodeQ == null) continue;
+                if (nodeP == null && nodeQ == null)
+                    continue;
                 if (nodeP == null || nodeQ == null || nodeP.val != nodeQ.val)
                     return false;
 
@@ -38,5 +39,16 @@ public class Solution {
         }
 
         return true;
+    }
+
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
+            return true;
+        }
+        if (p != null && q != null && p.val == q.val) {
+            return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+        } else {
+            return false;
+        }
     }
 }
