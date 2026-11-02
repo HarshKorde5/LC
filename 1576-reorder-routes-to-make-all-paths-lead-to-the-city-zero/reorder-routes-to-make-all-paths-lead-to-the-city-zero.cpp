@@ -12,7 +12,7 @@ public:
             adj[connection[1]].push_back({connection[0], 0});
         }
 
-        dfs(0, -1, adj);
+        bfs(0, n, adj);
         return res;
     }
 
@@ -24,5 +24,29 @@ public:
             }
         }
 
+    }
+
+
+    void bfs(int node, int n, vector<vector<pair<int,int>>>& adj){
+        queue<int> q;
+
+        vector<bool> visit(n);
+
+        q.push(node);
+        visit[node] = true;
+
+
+        while(!q.empty()){
+            node = q.front();
+            q.pop();
+
+            for(auto& [neighbor, sign] : adj[node]){
+                if(!visit[neighbor]){
+                    res += sign;
+                    visit[neighbor] = true;
+                    q.push(neighbor);
+                }
+            }
+        }
     }
 };
