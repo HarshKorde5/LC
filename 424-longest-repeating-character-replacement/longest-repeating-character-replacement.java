@@ -43,9 +43,10 @@ public class Solution {
                 map.put(s.charAt(start), map.get(s.charAt(start)) - 1);
                 start++;
 
-                for(int val : map.values()){
-                    maxFreq = Math.max(maxFreq,val);
-                }
+                // replace with maxHeap to store maxFreq character in current window else use stale maxFreq
+                // for(int val : map.values()){
+                //     maxFreq = Math.max(maxFreq,val);
+                // }
             }
 
             res = Math.max(res, end - start + 1);
